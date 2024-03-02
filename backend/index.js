@@ -3,10 +3,15 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 
 //importUser Route
-import userRoutes from "./routes/user.routes.js";
+import userRoutes from "./routes/user.route.js";
+import authRoutes from "./routes/auth.route.js";
 
 //create express app
 const app = express();
+
+//allows front end json to reach to backend
+app.use(express.json());
+
 //create .env file connector with app
 dotenv.config();
 
@@ -35,3 +40,4 @@ app.use("/test", (req, res) => {
 
 // create route with spacific routes
 app.use("/api/user", userRoutes);
+app.use("/api/auth", authRoutes);
