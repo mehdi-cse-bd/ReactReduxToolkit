@@ -9,7 +9,7 @@ const SignIn = () => {
         </div>
       )} */}
       <div className="row">
-        <h1 className="text-center my-10 text-3xl font-bold">Sign In Form</h1>
+        <h1 className="text-center my-20 text-3xl font-bold">Sign In Form</h1>
         <form
         //  onSubmit={handleFormSubmit}
         >
@@ -52,7 +52,7 @@ const SignIn = () => {
             Submit
           </button>
         </form>
-        <div>
+        <div className="my-5">
           <span>Do not have an account? </span>
           <Link to="/register">
             <span className="text-center my-10 text-xl font-bold">

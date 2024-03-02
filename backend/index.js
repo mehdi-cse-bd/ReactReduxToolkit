@@ -1,6 +1,8 @@
 import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import cors from "cors";
+import morgan from "morgan";
 
 //importUser Route
 import userRoutes from "./routes/user.route.js";
@@ -11,6 +13,22 @@ const app = express();
 
 //allows front end json to reach to backend
 app.use(express.json());
+
+//tells you which path did client hit
+app.use(morgan("dev"));
+
+// cors , connects backend with frontend
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000",
+//     credentials: true,
+//     methods: ["GET", "POST", "DELETE", "PUT"],
+//   })
+// );
+
+// cors , connects backend with frontend
+//এখানে সব সময় frontend এর port number বশবে
+app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 
 //create .env file connector with app
 dotenv.config();
