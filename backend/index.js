@@ -2,6 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
+//importUser Route
+import userRoutes from "./routes/user.routes.js";
+
 //create express app
 const app = express();
 //create .env file connector with app
@@ -22,10 +25,13 @@ app.listen(3000, () => {
   console.log(`Server is running in port  ${process.env.PORT} `);
 });
 
-//this is to test whether backend is runing or not
+//this is to test whether backend is running or not
 app.use("/test", (req, res) => {
   return res.status(202).json({
     success: true,
     message: "This is test purpose only",
   });
 });
+
+// create route with spacific routes
+app.use("/api/user", userRoutes);
