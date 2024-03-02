@@ -6,3 +6,8 @@ div#welcome {
   height: 65vh;
   background: #f8f9f9;
 }
+
+
+div#formWidth{
+  width:500px;
+}
