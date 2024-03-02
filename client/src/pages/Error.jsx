@@ -1,7 +1,7 @@
 const Error = () => {
   return (
     <>
-      <div className="container">
+      <div id="welcome" className="container">
         <div className="row">
           <h1 className="text-center text-success my-5">
             Error: Page Not Available
