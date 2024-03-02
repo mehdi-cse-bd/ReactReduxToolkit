@@ -41,3 +41,14 @@ app.use("/test", (req, res) => {
 // create route with spacific routes
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
+
+// এটা সব ধরনের error এর final destination । মানে জে কোন error ধরার পর এখানে এসে শেষ হয়। try catch এখানে এসে শেষ হয়।
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+  res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
+});
