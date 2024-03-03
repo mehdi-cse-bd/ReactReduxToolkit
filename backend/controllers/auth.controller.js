@@ -67,7 +67,7 @@ export const signin = asyncHandler(async (req, res, next) => {
     const validatePassword = bcryptjs.compareSync(password, userExist.password);
     if (!validatePassword) {
       return next(
-        errorHandler(400, "errorHandler TakingCareOfIt: Wrong Credintial")
+        errorHandler(400, "errorHandler TakingCareOfIt: Wrong Credentials")
       );
     }
     const token = jwt.sign({ id: userExist._id }, process.env.JWT_SECRETE, {
@@ -80,7 +80,7 @@ export const signin = asyncHandler(async (req, res, next) => {
       .cookie("access_token", token, {
         httpOnly: true,
       })
-      .json(rest);
+      .json({ success: true, rest });
   } catch (error) {
     next(error);
     //শুধু নিচের ৩ line লিখলে হতো

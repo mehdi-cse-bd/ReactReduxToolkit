@@ -41,9 +41,7 @@ const Register = () => {
   return (
     <div className="container " id="formWidth">
       <div className="row">
-        <h1 className="text-center my-20 text-3xl font-bold">
-          Registration Form
-        </h1>
+        <h1 className="text-center my-20 text-3xl font-bold">Registration</h1>
         {errorMessage && (
           <div className="alert alert-danger" role="alert">
             {errorMessage}
