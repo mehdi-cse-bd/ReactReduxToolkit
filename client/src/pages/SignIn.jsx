@@ -2,40 +2,46 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Button, Spinner } from "flowbite-react";
+import {
+  signInStart,
+  signInSuccess,
+  signInFailure,
+} from "../redux/user/userSlice.js";
+import { useDispatch, useSelector } from "react-redux";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({});
-  const [errorMessage, setErrorMessage] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const { loading, error: errorMessage } = useSelector((state) => state.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value.trim() });
   };
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     if (!formData.email || !formData.password) {
-      return setErrorMessage("Please Fill all fields");
+      return dispatch(signInFailure("Please Fill all fields"));
     }
     try {
-      setLoading(true);
-      setErrorMessage(null);
+      dispatch(signInStart());
       const res = await axios.post(
         "http://localhost:3000/api/auth/sign-in",
         formData
       );
-      console.log(res);
+      // console.log(res);
       const data = await res.data;
+      console.log(data);
       console.log(data);
       setFormData(data.message);
       if (data.success === true) {
+        dispatch(signInSuccess(data.rest));
         navigate("/");
       }
     } catch (error) {
       console.log(error);
       console.log(error.message);
       console.log(error.response.data.message);
-      setLoading(false);
-      setErrorMessage(error.response.data.message);
+      dispatch(signInFailure(error.response.data.message));
     }
   };
   return (
@@ -96,12 +102,6 @@ const SignIn = () => {
             </span>
           </Link>
         </div>
-
-        {/* {errorMessage && (
-          <Alert className="mt-1" color="failure">
-            {errorMessage}
-          </Alert>
-        )} */}
       </div>
     </div>
   );

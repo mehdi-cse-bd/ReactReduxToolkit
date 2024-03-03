@@ -61,7 +61,7 @@ export const signin = asyncHandler(async (req, res, next) => {
     });
     if (!userExist) {
       return next(
-        errorHandler(400, "errorHandler TakingCareOfIt: User do not exist")
+        errorHandler(400, "errorHandler TakingCareOfIt: User does not exist")
       );
     }
     const validatePassword = bcryptjs.compareSync(password, userExist.password);
